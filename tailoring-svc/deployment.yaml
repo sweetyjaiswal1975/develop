@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: tailoring
+spec:
+  replicas: 2  # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: tailoring-svc-image
+        ports:
+        - containerPort: 7009
+        envFrom:
+        - configMapRef:
+           name: my-config-map
+        - secretRef:
+           name: my-secret

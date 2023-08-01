@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config-map
+  namespace: tailoring
+data:
+  DB_HOST: mysql-service.tailoring.svc.cluster.local
+  WEB_URL: https://localhost:3000

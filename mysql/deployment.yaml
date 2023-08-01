@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: tailoring
+spec:
+  replicas: 1  # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: scout  # Replace with your desired root password
+          ports:
+            - containerPort: 3306  # MySQL default port
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql  # Mount path for MySQL data storage
+      volumes:
+        - name: mysql-data
+          emptyDir: {}  # You may use other types of persistent volumes for production setups

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: tailoring
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306  # Port exposed by the MySQL container
+      targetPort: 3306  # Port used by the MySQL application
+  type: ClusterIP  # You can choose other types of services if needed
